@@ -2,6 +2,17 @@ import os
 
 import openpyxl
 class reuseable:
+
+    def get_driver_path(self):
+        cwd = os.path.dirname(__file__)
+        driver_path = os.path.join(cwd, 'Driver/chromedriver')
+        return driver_path
+
+    def get_download_dir(self):
+        cwd = os.path.dirname(__file__)
+        download_path = os.path.join(cwd, 'Downloads')
+        return download_path
+
     def getRowCount(file,sheetName):
         workbook = openpyxl.load_workbook(file)
         sheet = workbook[sheetName]

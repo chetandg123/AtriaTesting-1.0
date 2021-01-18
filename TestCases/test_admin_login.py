@@ -32,7 +32,7 @@ class Test_Admin_Login:
     #     self.admin_login.setSelectUser("Admin")
     #     self.admin_login.setUserName(ReadConfig.getUsername())
     #     self.admin_login.setPassword(ReadConfig.getPassword())
-    #     self.admin_login.clickLogin()
+    #      self.admin_login.clickLogin()
     #     if self.admin_login.getUserListPage() == "Users List":
     #         assert True
     #         self.logger.info(

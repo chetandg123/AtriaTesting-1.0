@@ -1,3 +1,5 @@
+import os
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 class AdminLogin:
@@ -26,6 +28,14 @@ class AdminLogin:
     def setPassword(self,password):
         self.driver.find_element_by_id(self.text_box_passsword_id).clear()
         self.driver.find_element_by_id(self.text_box_passsword_id).send_keys(password)
+
+    def set_invalid_UserName(self,invalid_username):
+        self.driver.find_element_by_id(self.text_box_username_id).clear()
+        self.driver.find_element_by_id(self.text_box_username_id).send_keys(invalid_username)
+
+    def set_invalid_Password(self,invalid_password):
+        self.driver.find_element_by_id(self.text_box_passsword_id).clear()
+        self.driver.find_element_by_id(self.text_box_passsword_id).send_keys(invalid_password)
 
     def clickLogin(self):
         self.driver.find_element_by_id(self.button_login_id).click()
