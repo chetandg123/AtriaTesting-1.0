@@ -4,7 +4,7 @@ class AdminLogin:
     selectbox_selectuser_id="userType"
     text_box_username_id="username"
     text_box_passsword_id="password"
-    button_login_xpath="//*[@id='app']/div/div/div/div/div/button"
+    button_login_id="login"
 
     # Admin AddUser Locators
 
@@ -28,7 +28,7 @@ class AdminLogin:
         self.driver.find_element_by_id(self.text_box_passsword_id).send_keys(password)
 
     def clickLogin(self):
-        self.driver.find_element_by_xpath(self.button_login_xpath).click()
+        self.driver.find_element_by_id(self.button_login_id).click()
 
     #Admin UserList Methods
     def getUserListPage(self):
