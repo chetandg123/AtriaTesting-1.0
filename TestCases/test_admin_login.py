@@ -1,7 +1,7 @@
-from selenium import webdriver
 from utilities.readProperties import ReadConfig
-from PageObjects.AdminLoginPage import AdminLogin
 from utilities.customLogger import LogGen
+
+
 class Test_Admin_Login:
 
     baseURL = ReadConfig.getApplicationURL()

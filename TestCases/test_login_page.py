@@ -6,7 +6,6 @@ from utilities.readProperties import ReadConfig
 
 
 class Test_Atria_Login_Page:
-
     baseURL = ReadConfig.getApplicationURL()
     invalid_uname = ReadConfig.get_invalid_Username()
     invalid_pwd = ReadConfig.get_invalid_Password()
@@ -14,7 +13,6 @@ class Test_Atria_Login_Page:
 
 
     #Positive test scripts for login page
-
     def test_admin_login_page(self, setup):
         self.logger.info("********************Test Admin Login Started********************************")
         self.driver = setup
@@ -28,7 +26,7 @@ class Test_Atria_Login_Page:
             self.driver.save_screenshot("../Screenshots/" + "test_login_title.png")
             self.driver.close()
             self.logger.info(
-                "********************Test Admin Login Ended Due to difference in the title********************************")
+                "********************Test  Login Ended Due to difference in the title********************************")
             assert False
 
     def test_login_as_admin_user(self, setup):
@@ -43,7 +41,7 @@ class Test_Atria_Login_Page:
         actual_page = self.driver.current_url
         if  'users' in actual_page:
             assert True
-            self.logger.info("********************Test Admin Login Ended********************************")
+            self.logger.info("********************Test Admin Page Ended********************************")
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_login_page.png")
             self.driver.close()
@@ -64,12 +62,12 @@ class Test_Atria_Login_Page:
         if  'Wind Farms' in actual_content:
             assert True
             self.driver.close()
-            self.logger.info("********************Test Admin Login Ended********************************")
+            self.logger.info("********************Test Manager login Ended********************************")
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_login_page.png")
             self.driver.close()
             self.logger.info(
-                "********************Test Admin Page Ended Due to error msg is mismatch ********************************")
+                "********************Test Manager Page Ended Due to error msg is mismatch ********************************")
             assert False
 
     def test_login_as_ceo_user(self, setup):
@@ -85,12 +83,12 @@ class Test_Atria_Login_Page:
         if 'dashboard' in actual_content:
             assert True
             self.driver.close()
-            self.logger.info("********************Test Admin Login Ended********************************")
+            self.logger.info("********************Test CEO Login Ended********************************")
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_login_page.png")
             self.driver.close()
             self.logger.info(
-                "********************Test Admin Page Ended Due to error msg is mismatch ********************************")
+                "********************Test CEO Page Ended Due to error msg is mismatch ********************************")
             assert False
 
 

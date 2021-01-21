@@ -1,13 +1,27 @@
 import os
+import time
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+
+from utilities.readProperties import ReadConfig
+
+
 class AdminLogin:
     selectbox_selectuser_id="userType"
     text_box_username_id="username"
     text_box_passsword_id="password"
     button_login_id="login"
-
+    dashboard ="dashboard"
+    startdate_id="startDate"
+    enddate_id="endDate"
+    submit_id ="submit"
+    line_chart_id ="line"
+    bar_chart_id="bar"
+    download_btn="downloadBtn"
+    windfarm_csv="windfarms_variance.csv"
+    actual_generation="totalActualGen"
+    total_forcasted="totalForecastedGen"
     # Admin AddUser Locators
 
     #Admin UserList Locators
@@ -45,6 +59,13 @@ class AdminLogin:
         txt = self.driver.find_element_by_xpath(self.header_userlist_xpath).text
         return txt
 
+    def get_ceo_screen(self):
+        self.driver.maximize_window()
+        self.login_page = AdminLogin(self.driver)
+        self.login_page.setUserName(ReadConfig.get_ceo_Username())
+        self.login_page.setPassword(ReadConfig.get_ceo_Password())
+        self.login_page.clickLogin()
+        time.sleep(5)
 
     #Admin AddUser Methods
 
