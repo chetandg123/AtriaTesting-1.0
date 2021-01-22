@@ -169,8 +169,8 @@ class AdminLogin:
 
             if AdminLogin.getUpdateUserUserName(self) == update_list[0] and AdminLogin.getUpdateUserEmail(self) == update_list[1] and AdminLogin.getUpdateUserSelectRole(self) == update_list[2] and AdminLogin.getUpdateUserSelectAccessTo(self) == update_list[3]:
                 print("Auto Filling is working in the update user")
-                self.update_values=["test_admin","admin","user_create"]
-                AdminLogin.setUpdateUserUserName(self,"test_admin")
+                self.update_values=["CheckAdmin","admin","user_create"]
+                AdminLogin.setUpdateUserUserName(self,"CheckAdmin")
                 AdminLogin.setUpdateUserEmail(self,"test@gmail.com")
                 AdminLogin.setUpdateUserSelectRole(self,"Admin")
                 AdminLogin.setUpdateUserSelectAccessTo(self,"User Create")
@@ -205,10 +205,10 @@ class AdminLogin:
         for x in row_num:
             self.driver.find_element_by_xpath("//tr[{0}]/td[5]/span[1]".format(x)).click()
             time.sleep(5)
-            if AdminLogin.getUpdateUserUserName(self) == "test_admin" and AdminLogin.getUpdateUserEmail(self) == "test@gmail.com" and AdminLogin.getUpdateUserSelectRole(self) == "Admin" and AdminLogin.getUpdateUserSelectAccessTo(self) == "User Create":
+            if AdminLogin.getUpdateUserUserName(self) == "CheckAdmin" and AdminLogin.getUpdateUserEmail(self) == "test@gmail.com" and AdminLogin.getUpdateUserSelectRole(self) == "Admin" and AdminLogin.getUpdateUserSelectAccessTo(self) == "User Create":
                 print("Auto Filling is working in the update user")
-                self.update_values1=["test_ceo","ceo","all"]
-                AdminLogin.setUpdateUserUserName(self,"test_ceo")
+                self.update_values1=["CheckCeo","ceo","all"]
+                AdminLogin.setUpdateUserUserName(self,"CheckCeo")
                 AdminLogin.setUpdateUserEmail(self,"test@gmail.com")
                 AdminLogin.setUpdateUserSelectRole(self,"CEO")
                 AdminLogin.setUpdateUserSelectAccessTo(self,"All")
@@ -242,12 +242,12 @@ class AdminLogin:
         for x in row_num:
             self.driver.find_element_by_xpath("//tr[{0}]/td[5]/span[1]".format(x)).click()
             time.sleep(2)
-            if AdminLogin.getUpdateUserUserName(self) == "test_ceo" and AdminLogin.getUpdateUserEmail(
+            if AdminLogin.getUpdateUserUserName(self) == "CheckCeo" and AdminLogin.getUpdateUserEmail(
                     self) == "test@gmail.com" and AdminLogin.getUpdateUserSelectRole(
                     self) == "CEO" and AdminLogin.getUpdateUserSelectAccessTo(self) == "All":
                 print("Auto Filling is working in the update user")
-                self.update_values2 = ["test_manager", "manager", "gvpalli"]
-                AdminLogin.setUpdateUserUserName(self, "test_manager")
+                self.update_values2 = ["CheckManager", "manager", "gvpalli"]
+                AdminLogin.setUpdateUserUserName(self, "CheckManager")
                 AdminLogin.setUpdateUserEmail(self, "test@gmail.com")
                 AdminLogin.setUpdateUserSelectRole(self, "Manager")
                 AdminLogin.setUpdateUserSelectAccessTo(self, "GV Palli")
@@ -269,10 +269,8 @@ class AdminLogin:
             else:
                 self.test_status.append("Fail")
 
-        if "Fail" not in self.test_status:
-            assert True,"Edit user successful for admin,ceo and manager"
-        else:
-            assert False,"Edit user Failed"
+        return self.test_status
+
 
     def clickAddUserEditOptionWithCloseButton(self,rows):
         for x in range(1,rows):

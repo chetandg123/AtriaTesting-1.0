@@ -85,7 +85,8 @@ class Test_Admin_Login:
     def test_admin_login_add_user_with_invalid_username_invalid_email_invalid_password(self,setup):
         self.starting_row_num = 2
         self.ending_row_num = 5
-        self.logger.info("******Testing admin login add user with invalid username invalid email invalid passwprd started******")
+        self.logger.info("******Testing admin login add user with invalid username invalid email invalid passwprd "
+                         "started******")
         self.driver =setup
         self.al = AdminLogin(self.driver)
         self.al.adminLogin()
@@ -125,12 +126,14 @@ class Test_Admin_Login:
                     status.append("Pass")
 
         if "Fail" not in status:
-            self.logger.info("******Testing admin login add user with invalid username invalid email invalid password completed******")
+            self.logger.info("******Testing admin login add user with invalid username invalid email invalid password "
+                             "completed******")
             self.driver.close()
             assert True
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_addUser_by_entering_invalid_details.png")
-            self.logger.info("******Testing admin login add user with invalid username invalid email invalid password failed******")
+            self.logger.info("******Testing admin login add user with invalid username invalid email invalid password "
+                             "failed******")
             self.driver.close()
             assert False
 
@@ -208,7 +211,7 @@ class Test_Admin_Login:
             self.al.setAdduserSelectAccessTo(self.add_user_accessTo)
             self.al.setAddUserPassword(self.add_user_password)
             self.al.clickSubmit()
-            time.sleep(5)
+            time.sleep(2)
 
             act_title = self.al.getAddUserSuccessMsg()
             exp_title = "User exists with that name. Please create with different user"
@@ -241,6 +244,7 @@ class Test_Admin_Login:
         self.al.clickAuthentication()
         self.al.clickUserList()
         if self.al.getUserListTitile() == "Users List":
+            self.driver.close()
             assert True
             self.logger.info("******Testing admin login user list displayed successfully******")
         else:
@@ -295,6 +299,7 @@ class Test_Admin_Login:
         self.driver.close()
 
     def test_admin_login_userlist_edit_users(self,setup):
+        self.logger.info("******Testing admin login edit user's started******")
         self.starting_row_num = 8
         self.ending_row_num = 9
         self.driver = setup
@@ -329,7 +334,15 @@ class Test_Admin_Login:
                 if y[1] == x:
                     row_num.append(y[0])
         excel_record= self.al.getExcelRecord(8,9)
-        self.al.clickUpdateUser(row_num,excel_record)
+        self.test_status = self.al.clickUpdateUser(row_num,excel_record)
+        if "Fail" not in self.test_status:
+            self.logger.info("******Testing admin login update user's successfully created******")
+            self.driver.close()
+            assert True,"Edit user successful for admin,ceo and manager"
+        else:
+            self.logger.info("******Testing admin login update user's failed******")
+            self.driver.close()
+            assert False,"Edit user Failed"
 
     def test_admin_login_userlist_edit_option_close_button(self,setup):
         self.logger.info("******Testing admin login adduser edit option started******")
@@ -418,6 +431,10 @@ class Test_Admin_Login:
             self.logger.info("******Testing admin login logout failed******")
             self.driver.close()
             assert False,"Logout is unsuccessful"
+
+
+
+
 
 
 
