@@ -54,6 +54,8 @@ class ceo_page:
     delete_comment="deleteCommentBtn0"
     #GVPalli
     actualPowerGen="actualPowerGen"
+    forecastPowerGen="forecastPowerGen"
+
     forecastedPowerGen="forecastedPowerGen"
     gvpalli_forecasted="gvpalli_forecasted.csv"
     forecastedPower="forecastedPower"
@@ -72,6 +74,24 @@ class ceo_page:
     turbine_history ="turbine_history.csv"
 
     varianceendDate="varianceendDate"
+    varianceasOnDate="varianceasOnDate"
+    turbines_G01_id = 'G01'
+    turbines_G02_id = 'G02'
+    turbines_G03_id = 'G03'
+    turbines_G04_id = 'G04'
+    turbines_G05_id = 'G05'
+    turbines_G06_id = 'G06'
+    turbines_G07_id = 'G07'
+    turbines_G08_id = 'G08'
+    turbines_G09_id = 'G09'
+    turbines_G10_id = 'G10'
+    turbines_G11_id = 'G11'
+    turbines_G12_id = 'G12'
+    turbines_G13_id = 'G13'
+    turbines_G14_id = 'G14'
+    turbines_G15_id = 'G15'
+
+    list_turbine = ['G00','G01', 'G02', 'G03','G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15']
 
     def __init__(self,driver):
         self.driver=driver
@@ -92,10 +112,21 @@ class ceo_page:
         self.login_page.clickLogin()
         time.sleep(5)
 
+    def getTurbines(self, list):
+        self.driver.find_element_by_id(list).click()
+        time.sleep(5)
+
+    def check_list_of_turbines(self):
+        turs = self.driver.find_elements_by_id()
+
+
+    def getbackbtn(self):
+        self.driver.find_element_by_id(self.backIcon).click()
+
     def get_turbines_list(self):
-        self.driver.find_element_by_xpath("//*[@id='main-menu']/li").click()
+        self.driver.find_element_by_xpath("//*[@id='main-menu']/li[2]/a").click()
         lst = self.driver.find_elements_by_css_selector("ul.nav-submenu >li:nth-of-type(n)")
-        turbine=[]
+        turbine = []
         for i in lst:
             turbine.append(i.text)
         return turbine
@@ -144,15 +175,14 @@ class ceo_page:
 
                 act_generation = round(act_generation,2)
                 forcasted = round(forcasted,2)
-
+                os.remove(self.filename)
                 print(generated, ":", type(generated), act_generation, ":", type(act_generation), forcasting, ":",
                       type(forcasting), forcasted, ":", type(forcasted))
 
-                if int(act_generation) != int(generated):
+                if str(act_generation) != str(generated):
                     print('Difference found at actual generation ', act_generation, generated)
-                if int(forcasted) != int(forcasting):
+                if str(forcasted) != str(forcasting):
                     print('Difference found at actual forcasted ', forcasted, forcasting)
-                os.remove(self.filename)
                 self.driver.close()
             self.driver.close()
 
@@ -189,8 +219,8 @@ class ceo_page:
                     act_generation += float(row[2])
                     forcasted += float(row[1])
 
-                actual = (self.driver.find_element_by_id(self.login_page.actualPowerGen).text).replace('MWh', '')
-                forcast = (self.driver.find_element_by_id(self.login_page.forecastedPowerGen).text).replace('MWh', '')
+                actual = (self.driver.find_element_by_id(self.login_page.actualPowerGen).text).replace('KWh', '')
+                forcast = (self.driver.find_element_by_id(self.login_page.forecastPowerGen).text).replace('KWh', '')
 
                 generated = float(re.sub('\f', "", actual).strip())
                 forcasting = float(re.sub('\f', "", forcast).strip())
@@ -200,10 +230,10 @@ class ceo_page:
 
                 act_generation = round(act_generation, 2)
                 forcasted = round(forcasted, 2)
-
+                os.remove(self.filename)
                 print(generated,":",type(generated),act_generation,":",type(act_generation),forcasting,":",type(forcasting),forcasted,":",type(forcasted))
                 if int(act_generation) != int(generated):
                     print('Difference found at actual generation ', act_generation, generated)
                 if int(forcasted) != int(forcasting):
                     print('Difference found at actual forcasted ', forcasted, forcasting)
-                os.remove(self.filename)
+
