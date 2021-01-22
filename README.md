@@ -1,8 +1,8 @@
-# AtriaTesting-1.0
+AtriaTesting-1.0
 Prerequisites:
   To Run Selenium python scripts ,Install pycharm in your system
   Google Chrome need to be installed in the server or local machine.
-  Chrome driver need to be downloaded and placed in the cQubeTesting-1.9/Driver folder
+  Chrome driver need to be downloaded and placed in the AtriaTesting-1.0/Driver folder
 Steps to install the google chrome
 
   Open the terminal (Ctrl+Alt+t) in the ubuntu
