@@ -3,11 +3,9 @@ import os
 import re
 import time
 
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
 
 from PageObjects.AdminLoginPage import AdminLogin
-from utilities.ExcelUtils import reuseable
+from get_directory import DirectoryPath
 from utilities.readProperties import ReadConfig
 
 
@@ -22,6 +20,9 @@ class ceo_page:
     line_chart_id ="line"
     bar_chart_id="bar"
     download_btn="downloadBtn"
+
+    text_box_username_id = "username"
+    text_box_passsword_id = "password"
 
     varianceDownloadBtn="varianceDownloadBtn"
     turbinesDownloadBtn="turbinesDownloadBtn"
@@ -99,7 +100,13 @@ class ceo_page:
     def clickLogin(self):
         self.driver.find_element_by_id(self.button_login_id).click()
 
-    #Admin UserList Methods
+    # UserList Methods
+    def set_invalid_UserName(self,username):
+        self.driver.find_element_by_id(self.text_box_username_id).clear()
+        self.driver.find_element_by_id(self.text_box_username_id).send_keys(username)
+
+
+
     def getUserListPage(self):
         txt = self.driver.find_element_by_xpath(self.header_userlist_xpath).text
         return txt
@@ -132,7 +139,7 @@ class ceo_page:
         return turbine
 
     def check_variance_chart(self):
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.find_element_by_id(self.login_page.forcasted_onDate).clear()
         time.sleep(2)
@@ -187,7 +194,7 @@ class ceo_page:
             self.driver.close()
 
     def check_turbines_forcasted_chart(self):
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.find_element_by_id(self.login_page.forcasted_onDate).clear()
         time.sleep(2)

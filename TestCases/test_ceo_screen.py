@@ -3,10 +3,8 @@ import os
 import re
 import time
 
-from selenium.webdriver.support.select import Select
-
 from PageObjects.CEO_Page import ceo_page
-from utilities.ExcelUtils import reuseable
+from get_directory import DirectoryPath
 from utilities.customLogger import LogGen
 from utilities.readProperties import ReadConfig
 
@@ -111,7 +109,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test Start Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -138,7 +136,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test end Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -160,7 +158,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test ceo download icon  Started********************************")
         self.driver = setup
         count =0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -182,7 +180,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test ceo download icon  Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -198,7 +196,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test line and bar Graph Started********************************")
         self.driver = setup
         count =0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -228,7 +226,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test forcasted Graph Started********************************")
         self.driver = setup
         count =0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -293,7 +291,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test forcasted Graph Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -311,7 +309,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test forcasted Graph Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -335,7 +333,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test forcasted Graph Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -357,7 +355,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test Start Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -388,7 +386,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test end Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -414,7 +412,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test ceo download icon  Started********************************")
         self.driver = setup
         count =0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -439,7 +437,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test line and bar Graph Started********************************")
         self.driver = setup
         count =0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -471,7 +469,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted Graph Started********************************")
         self.driver = setup
         count =0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -508,14 +506,16 @@ class Test_Atria_CEO_Screen:
                 forcasted = 0
                 for row in csv.reader(fin):
                     print('\n',row)
-                    act_generation += float(row[2])
-                    forcasted += float(row[1])
+                    act_generation += float(row[1])
+                    forcasted += float(row[2])
 
                 actual_ui = (self.driver.find_element_by_id(self.login_page.actualPowerGen).text).replace('MWh','')
                 forcast_ui=(self.driver.find_element_by_id(self.login_page.forecastedPowerGen).text).replace('MWh','')
+
                 generated = float(re.sub('\f', "", actual_ui).strip())
                 forcasting =float(re.sub('\f' ,"",forcast_ui).strip())
-                print(generated ,forcasting)
+
+                print(generated ,act_generation)
                 os.remove(self.filename)
                 if  act_generation != generated:
                     print('Difference found at actual generation ',act_generation ,generated)
@@ -532,7 +532,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted download icon Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -560,7 +560,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted Graph Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -617,7 +617,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted Graph Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -639,7 +639,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted Graph Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -667,7 +667,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted Graph Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -696,7 +696,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli forcasted Graph Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -723,7 +723,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli Turbines Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -759,7 +759,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli Turbines Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -783,7 +783,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli Turbines Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -806,7 +806,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli Turbines Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -832,7 +832,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli Turbines Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -872,7 +872,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test gv palli Turbines Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -898,7 +898,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test Start Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -929,7 +929,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test end Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -955,7 +955,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test Start Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -986,7 +986,7 @@ class Test_Atria_CEO_Screen:
         self.logger.info("********************Test end Date picker Started********************************")
         self.driver = setup
         count = 0
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.get_ceo_screen()
@@ -1011,7 +1011,7 @@ class Test_Atria_CEO_Screen:
     def test_click_on_each_turbines(self, setup):
         self.logger.info("********************Test all turbines Started********************************")
         self.driver = setup
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.driver.implicitly_wait(200)
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)

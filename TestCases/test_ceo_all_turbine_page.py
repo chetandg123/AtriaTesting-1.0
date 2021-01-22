@@ -3,9 +3,8 @@ import os
 import re
 import time
 
-
 from PageObjects.CEO_Page import ceo_page
-from utilities.ExcelUtils import reuseable
+from get_directory import DirectoryPath
 from utilities.customLogger import LogGen
 from utilities.readProperties import ReadConfig
 
@@ -21,7 +20,7 @@ class Test_Atria_CEO_Turbines_Screen:
     def test_variance_chart_for_all_turbines(self ,setup):
         self.logger.info("********************Test all turbines Started********************************")
         self.driver = setup
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.driver.implicitly_wait(200)
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
@@ -80,7 +79,7 @@ class Test_Atria_CEO_Turbines_Screen:
     def test_forcasted_chart_for_all_turbines(self, setup):
         self.logger.info("********************Test all turbines Started********************************")
         self.driver = setup
-        self.files = reuseable()
+        self.files = DirectoryPath()
         self.driver.implicitly_wait(200)
         self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)

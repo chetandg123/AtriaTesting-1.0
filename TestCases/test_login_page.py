@@ -1,6 +1,7 @@
 import time
 
 from PageObjects.AdminLoginPage import AdminLogin
+from PageObjects.CEO_Page import ceo_page
 from utilities.customLogger import LogGen
 from utilities.readProperties import ReadConfig
 
@@ -101,7 +102,8 @@ class Test_Atria_Login_Page:
         self.driver.get(self.baseURL)
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter user name and password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the username & password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
@@ -115,12 +117,13 @@ class Test_Atria_Login_Page:
     def test_login_without_password(self, setup):
         self.logger.info("********************Test Login Page Started********************************")
         self.driver = setup
-        self.login_page = AdminLogin(self.driver)
+        self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.set_invalid_UserName(ReadConfig.get_invalid_Username())
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter username/password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
@@ -134,12 +137,13 @@ class Test_Atria_Login_Page:
     def test_login_without_username(self, setup):
         self.logger.info("********************Test Login Page Started********************************")
         self.driver = setup
-        self.login_page = AdminLogin(self.driver)
+        self.login_page = ceo_page(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.set_invalid_UserName(ReadConfig.get_invalid_Password())
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter username/password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
@@ -153,13 +157,15 @@ class Test_Atria_Login_Page:
     def test_login_with_valid_username_and_invalid_pwd(self,setup):
         self.logger.info("********************Test Login Page Started********************************")
         self.driver = setup
+        self.login = ceo_page(self.driver)
         self.login_page = AdminLogin(self.driver)
         self.driver.get(self.baseURL)
         self.login_page.setUserName(ReadConfig.getUsername())
-        self.login_page.set_invalid_UserName(ReadConfig.get_invalid_Password())
+        self.login.set_invalid_UserName(ReadConfig.get_invalid_Password())
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter username/password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
