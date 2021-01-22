@@ -101,7 +101,8 @@ class Test_Atria_Login_Page:
         self.driver.get(self.baseURL)
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter user name and password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the username & password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
@@ -120,7 +121,8 @@ class Test_Atria_Login_Page:
         self.login_page.set_invalid_UserName(ReadConfig.get_invalid_Username())
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter username/password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
@@ -139,7 +141,8 @@ class Test_Atria_Login_Page:
         self.login_page.set_invalid_UserName(ReadConfig.get_invalid_Password())
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter username/password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
@@ -159,7 +162,8 @@ class Test_Atria_Login_Page:
         self.login_page.set_invalid_UserName(ReadConfig.get_invalid_Password())
         self.login_page.clickLogin()
         errormsg = self.driver.find_element_by_tag_name('p').text
-        if errormsg == 'Please Enter username/password':
+        print('errormsg on ui',errormsg)
+        if errormsg == 'Please enter the password.':
             assert True
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")

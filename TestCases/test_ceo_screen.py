@@ -3,10 +3,9 @@ import os
 import re
 import time
 
-from selenium.webdriver.support.select import Select
 
 from PageObjects.CEO_Page import ceo_page
-from utilities.ExcelUtils import reuseable
+from get_directory import reuseable
 from utilities.customLogger import LogGen
 from utilities.readProperties import ReadConfig
 
@@ -508,14 +507,16 @@ class Test_Atria_CEO_Screen:
                 forcasted = 0
                 for row in csv.reader(fin):
                     print('\n',row)
-                    act_generation += float(row[2])
-                    forcasted += float(row[1])
+                    act_generation += float(row[1])
+                    forcasted += float(row[2])
 
                 actual_ui = (self.driver.find_element_by_id(self.login_page.actualPowerGen).text).replace('MWh','')
                 forcast_ui=(self.driver.find_element_by_id(self.login_page.forecastedPowerGen).text).replace('MWh','')
+
                 generated = float(re.sub('\f', "", actual_ui).strip())
                 forcasting =float(re.sub('\f' ,"",forcast_ui).strip())
-                print(generated ,forcasting)
+
+                print(generated ,act_generation)
                 os.remove(self.filename)
                 if  act_generation != generated:
                     print('Difference found at actual generation ',act_generation ,generated)

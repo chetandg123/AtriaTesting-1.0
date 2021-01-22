@@ -3,11 +3,9 @@ import os
 import re
 import time
 
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
+from get_directory import reuseable
 
 from PageObjects.AdminLoginPage import AdminLogin
-from utilities.ExcelUtils import reuseable
 from utilities.readProperties import ReadConfig
 
 

@@ -3,9 +3,8 @@ import os
 import re
 import time
 
-
 from PageObjects.CEO_Page import ceo_page
-from utilities.ExcelUtils import reuseable
+from get_directory import reuseable
 from utilities.customLogger import LogGen
 from utilities.readProperties import ReadConfig
 
