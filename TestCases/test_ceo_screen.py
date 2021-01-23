@@ -31,7 +31,7 @@ class Test_Atria_CEO_Screen:
             self.driver.close()
             self.logger.info("********************Test CEO Login Ended********************************")
         else:
-            self.driver.save_screenshot("../Screenshots/" + "test_login_page.png")
+            self.driver.save_screenshot("../Screenshots/" + "test_login_as_ceo.png")
             self.driver.close()
             self.logger.info(
                 "********************Test CEO Page Ended Due to error msg is mismatch ********************************")
@@ -53,7 +53,7 @@ class Test_Atria_CEO_Screen:
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
         else:
-            self.driver.save_screenshot("../Screenshots/" + "test_login_page.png")
+            self.driver.save_screenshot("../Screenshots/" + "test_ceo_dashboard_page.png")
             self.driver.close()
             self.logger.info(
                 "********************Test Admin Page Ended Due to error msg is mismatch ********************************")
@@ -75,6 +75,7 @@ class Test_Atria_CEO_Screen:
             self.driver.close()
             self.logger.info("********************Test Admin Login Ended********************************")
         else:
+            self.driver.save_screenshot("../Screenshots/" + "test_ceo_forcasted_dashboard_page.png")
             self.driver.close()
             self.logger.info(
                 "********************Test  forcasted dashboard Page Ended Due to error msg is mismatch ********************************")
@@ -100,6 +101,7 @@ class Test_Atria_CEO_Screen:
             self.driver.close()
             self.logger.info("********************Test GV Palli windfarm icon Ended********************************")
         else:
+            self.driver.save_screenshot("../Screenshots/" + "test_windfarm_page.png")
             self.driver.close()
             self.logger.info(
                 "********************Test  forcasted dashboard Page Ended Due to error msg is mismatch ********************************")
@@ -119,18 +121,22 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.startdate_id).clear()
         time.sleep(2)
         startdt = self.driver.find_element_by_id(self.login_page.startdate_id)
-        startdt.send_keys('17/01/2021')
+        startdt.send_keys(self.login_page.start_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.enddate_id).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.enddate_id)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.end_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submit_id).click()
         time.sleep(5)
-        self.driver.close()
+        if endDate == self.login_page.end_date:
+            assert True
+        else:
+            self.driver.save_screenshot("../Screenshots/" + "test_endDate_picker.png")
+            self.driver.close()
         self.logger.info(
-                    "********************Test Start date is  Ended Due to error msg is mismatch ********************************")
+                    "********************Test start date is  Ended Due to error msg is mismatch ********************************")
 
     def test_end_date_picker(self,setup):
         self.logger.info("********************Test end Date picker Started********************************")
@@ -146,13 +152,17 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.enddate_id).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.enddate_id)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.start_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submit_id).click()
         time.sleep(3)
-        self.driver.close()
+        if endDate == self.login_page.end_date:
+            assert True
+        else:
+            self.driver.save_screenshot("../Screenshots/" + "test_endDate_picker.png")
+            self.driver.close()
         self.logger.info(
-                    "********************Test end date is  Ended Due to error msg is mismatch ********************************")
+            "********************Test end date is  Ended Due to error msg is mismatch ********************************")
 
     def test_check_download_icon(self, setup):
         self.logger.info("********************Test ceo download icon  Started********************************")
@@ -172,8 +182,9 @@ class Test_Atria_CEO_Screen:
             print('Windfarm variance csv file is not download')
             count = count + 1
             assert False
-        os.remove(self.filename)
-        self.driver.close()
+        else:
+            os.remove(self.filename)
+            self.driver.close()
         self.logger.info("********************Tested Downloading csv file is mismatch *********")
 
     def test_windfarms(self,setup):
@@ -189,8 +200,10 @@ class Test_Atria_CEO_Screen:
         images = len(windfarms)
         if images == 0 :
             assert False
-        self.driver.close()
-        self.logger.info("********************Tested Downloading csv file is mismatch *********")
+        else:
+            self.driver.save_screenshot("../Screenshots/" + "test_windfarm_images.png")
+            self.driver.close()
+        self.logger.info("********************Checked wind farm images *********")
 
     def test_forcasted_line_and_bar_charts(self, setup):
         self.logger.info("********************Test line and bar Graph Started********************************")
@@ -206,12 +219,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.startdate_id).clear()
         time.sleep(2)
         startDate = self.driver.find_element_by_id(self.login_page.startdate_id)
-        startDate.send_keys('17/01/2021')
+        startDate.send_keys(self.login_page.start_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.enddate_id).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.enddate_id)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.end_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submit_id).click()
         time.sleep(3)
@@ -236,12 +249,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.startdate_id).clear()
         time.sleep(2)
         startDate = self.driver.find_element_by_id(self.login_page.startdate_id)
-        startDate.send_keys('20/01/2021')
+        startDate.send_keys(self.login_page.for_sdate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.enddate_id).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.enddate_id)
-        endDate.send_keys('22/01/2021')
+        endDate.send_keys(self.login_page.for_end)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submit_id).click()
         time.sleep(3)
@@ -272,6 +285,7 @@ class Test_Atria_CEO_Screen:
                 forcast=(self.driver.find_element_by_id(self.login_page.total_forcasted).text).replace('MWh','')
                 generated = float(re.sub('\f', "", actual).strip())
                 forcasting =float(re.sub('\f' ,"",forcast).strip())
+                os.remove(self.filename)
                 if  act_generation != generated:
                     print('Difference found at actual generation ',act_generation ,generated)
                     count = count + 1
@@ -280,15 +294,14 @@ class Test_Atria_CEO_Screen:
                     print('Difference found at actual forcasted ',forcasted , forcasting)
                     count = count + 1
                     assert False
-                os.remove(self.filename)
             self.driver.close()
-            self.logger.info("******************checked with wind farm variance ****************")
+            self.logger.info("******************checked with wind farm variance chart and file ****************")
 
 
     # Wind Farm button
 
     def test_click_on_wind_farm_button(self, setup):
-        self.logger.info("********************Test forcasted Graph Started********************************")
+        self.logger.info("********************Test Wind farm button ********************************")
         self.driver = setup
         count = 0
         self.files = DirectoryPath()
@@ -302,11 +315,12 @@ class Test_Atria_CEO_Screen:
         if  wf != "Wind Farms":
             print('Wind form button is clicked ')
             assert False
-        self.driver.close()
+        else:
+              self.driver.close()
         self.logger.info("******************checked with wind farm button ****************")
 
     def test_click_on_wind_farm_options(self, setup):
-        self.logger.info("********************Test forcasted Graph Started********************************")
+        self.logger.info("********************Test Wind farm options ********************************")
         self.driver = setup
         count = 0
         self.files = DirectoryPath()
@@ -325,7 +339,7 @@ class Test_Atria_CEO_Screen:
         else:
             assert False
         self.driver.close()
-        self.logger.info("******************checked with wind farm button ****************")
+        self.logger.info("******************checked with wind farm options ****************")
 
     # GV palli windfarm
 
@@ -347,9 +361,9 @@ class Test_Atria_CEO_Screen:
             print('Gvpalli Wind Farm is displayed')
             assert True
         else:
-            assert False
-        self.driver.close()
-        self.logger.info("******************checked with wind farm button ****************")
+            self.driver.save_screenshot("../Screenshots/" + "test_gv palli windfarm_title.png")
+            self.driver.close()
+        self.logger.info("******************checked with wind farm page ****************")
 
     def test_gvpalli_start_date_picker(self,setup):
         self.logger.info("********************Test Start Date picker Started********************************")
@@ -369,12 +383,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.startdate_id).clear()
         time.sleep(2)
         startdt = self.driver.find_element_by_id(self.login_page.startdate_id)
-        startdt.send_keys('17/01/2021')
+        startdt.send_keys(self.login_page.start_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.enddate_id).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.enddate_id)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.end_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submit_id).click()
         time.sleep(3)
@@ -400,7 +414,7 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.enddate_id).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.enddate_id)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.end_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submit_id).click()
         time.sleep(3)
@@ -409,7 +423,7 @@ class Test_Atria_CEO_Screen:
                     "********************Test end date is  Ended Due to error msg is mismatch ********************************")
 
     def test_check_variance_csv_file_download_icon(self, setup):
-        self.logger.info("********************Test ceo download icon  Started********************************")
+        self.logger.info("********************Test variance Started********************************")
         self.driver = setup
         count =0
         self.files = DirectoryPath()
@@ -449,12 +463,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.forcasted_onDate).clear()
         time.sleep(2)
         startDate = self.driver.find_element_by_id(self.login_page.forcasted_onDate)
-        startDate.send_keys('10/01/2021')
+        startDate.send_keys(self.login_page.line_forsdate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedendDate).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.forecastedendDate)
-        endDate.send_keys('20/01/2021')
+        endDate.send_keys(self.login_page.line_foredate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedSubmitBtn).click()
         time.sleep(3)
@@ -481,12 +495,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.forcasted_onDate).clear()
         time.sleep(2)
         startDate = self.driver.find_element_by_id(self.login_page.forcasted_onDate)
-        startDate.send_keys('10/01/2021')
+        startDate.send_keys(self.login_page.line_forsdate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedendDate).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.forecastedendDate)
-        endDate.send_keys('20/01/2021')
+        endDate.send_keys(self.login_page.line_foredate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedSubmitBtn).click()
         time.sleep(3)
@@ -569,18 +583,6 @@ class Test_Atria_CEO_Screen:
         time.sleep(3)
         self.driver.find_element_by_xpath(self.login_page.gvpalli_button).click()
         time.sleep(5)
-        self.driver.find_element_by_id(self.login_page.forcasted_onDate).clear()
-        time.sleep(2)
-        # startDate = self.driver.find_element_by_id(self.login_page.forcasted_onDate)
-        # startDate.send_keys('10/01/2021')
-        # time.sleep(2)
-        # self.driver.find_element_by_id(self.login_page.forecastedendDate).clear()
-        # time.sleep(2)
-        # endDate = self.driver.find_element_by_id(self.login_page.forecastedendDate)
-        # endDate.send_keys('20/01/2021')
-        # time.sleep(2)
-        # self.driver.find_element_by_id(self.login_page.forecastedSubmitBtn).click()
-        # time.sleep(3)
         self.driver.find_element_by_id(self.login_page.line_chart_id).click()
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.bar_chart_id).click()
@@ -601,14 +603,13 @@ class Test_Atria_CEO_Screen:
                 forcasted = 0
                 for row in csv.reader(fin):
                     forcasted += float(row[1])
-
                 forcast=(self.driver.find_element_by_id(self.login_page.forecastedPower).text).replace('MWh','')
                 forcasting =float(re.sub('\f' ,"",forcast).strip())
                 print(forcast,forcasting)
+                os.remove(self.filename)
                 if  forcasted != forcasting:
                     print('Difference found at actual generation ',forcasting , forcasted)
                     assert False
-                os.remove(self.filename)
             self.driver.close()
             self.logger.info("******************checked with wind farm variance ****************")
 
@@ -658,8 +659,8 @@ class Test_Atria_CEO_Screen:
             print('Comment is updated and displayed')
             assert True
             self.driver.close()
-
         else:
+            self.driver.save_screenshot("../Screenshots/" + "test_comment_update.png")
             assert False
         self.logger.info("****************Checked with comment icon *****************")
 
@@ -689,6 +690,7 @@ class Test_Atria_CEO_Screen:
             self.driver.close()
 
         else:
+            self.driver.save_screenshot("../Screenshots/" + "test_comment_update.png")
             assert False
         self.logger.info("****************Checked with comment icon *****************")
 
@@ -714,6 +716,9 @@ class Test_Atria_CEO_Screen:
         if self.login_page.updated_text not in self.driver.page_source:
             assert True
             self.driver.close()
+        else:
+            self.driver.save_screenshot("../Screenshots/" + "test_comment_delete.png")
+            assert False
         self.logger.info("****************Checked deleted comment from comment box *****************")
 
 
@@ -775,6 +780,7 @@ class Test_Atria_CEO_Screen:
             assert True
             print(turbine_name ,"is displayed ")
         else:
+            self.driver.save_screenshot("../Screenshots/" + "test_turbines.png")
             assert False
         self.login_page.check_variance_chart()
         self.logger.info("***************************Turbines csv file and list of turbines*****************")
@@ -853,7 +859,6 @@ class Test_Atria_CEO_Screen:
             with open(self.filename) as fin:
                 csv_reader = csv.reader(fin, delimiter=',')
                 header = next(csv_reader)
-                act_generation = 0
                 forcasted = 0
                 for row in csv.reader(fin):
                     forcasted += float(row[1])
@@ -866,10 +871,10 @@ class Test_Atria_CEO_Screen:
                     assert False
             os.remove(self.filename)
         self.driver.close()
-        self.logger.info("*******************Downloading forcasted csv file of turbine****************")
+        self.logger.info("*******************total power generation data tested ****************")
 
     def test_log_history_download_icon(self,setup):
-        self.logger.info("********************Test gv palli Turbines Started********************************")
+        self.logger.info("********************Test log history Started********************************")
         self.driver = setup
         self.driver.implicitly_wait(30)
         self.files = DirectoryPath()
@@ -892,7 +897,7 @@ class Test_Atria_CEO_Screen:
         else:
             os.remove(self.filename)
         self.driver.close()
-        self.logger.info("*******************Downloading forcasted csv file of turbine**************")
+        self.logger.info("*******************log history download **************")
 
     def test_start_date_picker_for_variance_turbine(self,setup):
         self.logger.info("********************Test Start Date picker Started********************************")
@@ -912,12 +917,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.forcasted_Date).clear()
         time.sleep(2)
         startdt = self.driver.find_element_by_id(self.login_page.forcasted_Date)
-        startdt.send_keys('17/01/2021')
+        startdt.send_keys(self.login_page.start_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.varianceendDate).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.varianceendDate)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.end_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submitBtn).click()
         time.sleep(3)
@@ -943,7 +948,7 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.varianceendDate).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.varianceendDate)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.line_forsdate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.submitBtn).click()
         time.sleep(3)
@@ -969,12 +974,12 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.forcasted_onDate).clear()
         time.sleep(2)
         startdt = self.driver.find_element_by_id(self.login_page.forcasted_onDate)
-        startdt.send_keys('17/01/2021')
+        startdt.send_keys(self.login_page.start_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedendDate).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.forecastedendDate)
-        endDate.send_keys('19/01/2021')
+        endDate.send_keys(self.login_page.end_date)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedSubmitBtn).click()
         time.sleep(3)
@@ -1000,7 +1005,7 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.forecastedendDate).clear()
         time.sleep(2)
         endDate = self.driver.find_element_by_id(self.login_page.forecastedendDate)
-        endDate.send_keys('21/01/2021')
+        endDate.send_keys(self.login_page.line_foredate)
         time.sleep(2)
         self.driver.find_element_by_id(self.login_page.forecastedSubmitBtn).click()
         time.sleep(3)

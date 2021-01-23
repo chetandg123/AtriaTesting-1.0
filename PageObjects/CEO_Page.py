@@ -93,6 +93,12 @@ class ceo_page:
     turbines_G15_id = 'G15'
 
     list_turbine = ['G00','G01', 'G02', 'G03','G04','G05','G06','G07','G08','G09','G10','G11','G12','G13','G14','G15']
+    start_date="17/01/2021"
+    end_date="19/01/2021"
+    for_sdate="20/01/2021"
+    for_end="22/01/2021"
+    line_forsdate="10/01/2021"
+    line_foredate="20/02/2021"
 
     def __init__(self,driver):
         self.driver=driver
