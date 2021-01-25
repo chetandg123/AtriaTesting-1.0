@@ -277,7 +277,7 @@ class Test_Admin_Login:
             self.driver.save_screenshot("../Screenshots/" + "test_admin_login_created_users.png")
             self.logger.info("******Testing admin login created users failed******")
             self.driver.close()
-            assert False,"Created users not exist in the user list"
+            assert False,"Created users not configured properly on the userlist table"
 
     def test_admin_login_userlist_edit_option_for_all_users(self,setup):
         self.logger.info("******Testing admin login user list edit option checking started******")
