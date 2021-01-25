@@ -5,7 +5,7 @@ import time
 
 from PageObjects.CEO_Page import ceo_page
 from get_directory import DirectoryPath
-from utilities.customLogger import LogGen
+from utilities.ceo_logs import ceoLogGen
 from utilities.readProperties import ReadConfig
 
 
@@ -14,7 +14,7 @@ class Test_Atria_CEO_Screen:
     baseURL = ReadConfig.getApplicationURL()
     invalid_uname = ReadConfig.get_invalid_Username()
     invalid_pwd = ReadConfig.get_invalid_Password()
-    logger = LogGen.ceo_logs()
+    logger =ceoLogGen.logen()
     #Dashboard Test Scripts
 
     def test_login_as_ceo_user(self, setup):
@@ -360,6 +360,7 @@ class Test_Atria_CEO_Screen:
         if header == "Gvpalli Wind Farm":
             print('Gvpalli Wind Farm is displayed')
             assert True
+            self.driver.close()
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_gv palli windfarm_title.png")
             self.driver.close()
@@ -692,6 +693,7 @@ class Test_Atria_CEO_Screen:
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_comment_update.png")
             assert False
+            self.driver.close()
         self.logger.info("****************Checked with comment icon *****************")
 
     def test_delete_comment_in_box(self, setup):
@@ -719,6 +721,7 @@ class Test_Atria_CEO_Screen:
         else:
             self.driver.save_screenshot("../Screenshots/" + "test_comment_delete.png")
             assert False
+            self.driver.close()
         self.logger.info("****************Checked deleted comment from comment box *****************")
 
 
@@ -891,12 +894,11 @@ class Test_Atria_CEO_Screen:
         self.driver.find_element_by_id(self.login_page.turbineHistoryDownloadBtn).click()
         time.sleep(3)
         self.filename = self.files.get_download_dir() + '/' + self.login_page.turbine_history
-        print(self.filename)
         if os.path.isfile(self.filename) != True:
             print('Turbine history csv file is not download')
         else:
             os.remove(self.filename)
-        self.driver.close()
+            self.driver.close()
         self.logger.info("*******************log history download **************")
 
     def test_start_date_picker_for_variance_turbine(self,setup):

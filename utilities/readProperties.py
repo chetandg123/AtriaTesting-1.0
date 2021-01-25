@@ -20,7 +20,7 @@ class ReadConfig():
 
     @staticmethod
     def get_manager_Username():
-        username = config.get('common info', 'manager_user')
+        username = config.get('common info', 'manager_username')
         return username
 
     @staticmethod
